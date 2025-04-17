@@ -30,5 +30,12 @@ public class Main {
         System.out.println(taskManager.getAllTaskList());
         System.out.println(taskManager.getAllEpicsList());
         System.out.println(taskManager.getAllSubTasksList());
+
+        System.out.println("");
+        taskManager.clearEpics();
+        taskManager.clearTasks();
+        System.out.println(taskManager.getAllTaskList());
+        System.out.println(taskManager.getAllEpicsList());
+        System.out.println(taskManager.getAllSubTasksList());
     }
 }
