@@ -1,7 +1,8 @@
 public class Task {
-    private String name;
-    private String description;
-    private Status status = Status.NEW;
+    protected String name;
+    protected String description;
+    protected Status status = Status.NEW;
+    protected Integer ID;
 
     public Task(String name, String description) {
         this.name = name;
@@ -30,6 +31,14 @@ public class Task {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getID() {
+        return ID;
+    }
+
+    public void setID(Integer ID) {
+        this.ID = ID;
     }
 
     @Override
