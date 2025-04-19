@@ -20,5 +20,3 @@ public class Epic extends Task {
         }
     }
 }
-
-// Прописать получение эпиком всех ID его SubTask-ов

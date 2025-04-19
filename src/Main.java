@@ -14,19 +14,21 @@ public class Main {
         System.out.println(taskManager.getAllTaskList());
         System.out.println(taskManager.getAllEpicsList());
         System.out.println(taskManager.getAllSubTasksList());
+        System.out.println(taskManager.getEpicAllSubTasks(2));
 
         System.out.println("");
-        taskManager.updateTaskStatus(taskManager.getTaskByID(0));
-        taskManager.updateSubTaskStatus(taskManager.getSubTaskByID(3));
-        taskManager.updateSubTaskStatus(taskManager.getSubTaskByID(6));
+        taskManager.getTask(0).setStatus(Status.DONE);
+        taskManager.getSubTask(3).setStatus(Status.DONE);
+        taskManager.updateSubTask(taskManager.getSubTask(3));
+        taskManager.getSubTask(6).setStatus(Status.DONE);
         System.out.println(taskManager.getAllTaskList());
         System.out.println(taskManager.getAllEpicsList());
         System.out.println(taskManager.getAllSubTasksList());
 
         System.out.println("");
-        taskManager.deleteTask(taskManager.getTaskByID(0));
-        taskManager.deleteEpic(taskManager.getEpicByID(5));
-        taskManager.deleteSubTask(taskManager.getSubTaskByID(3));
+        taskManager.deleteTask(1);
+        taskManager.deleteEpic(5);
+        taskManager.deleteSubTask(3);
         System.out.println(taskManager.getAllTaskList());
         System.out.println(taskManager.getAllEpicsList());
         System.out.println(taskManager.getAllSubTasksList());
