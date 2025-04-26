@@ -1,6 +1,9 @@
+package TaskApp;
+
 public class Main {
 
-    static TaskManager taskManager = new TaskManager();
+    static InMemoryTaskManager taskManager = new InMemoryTaskManager();
+    //static TaskApp.InMemoryHistoryManager historyManager = new TaskApp.InMemoryHistoryManager();
 
     public static void main(String[] args) {
         System.out.println("");
@@ -15,6 +18,23 @@ public class Main {
         System.out.println(taskManager.getAllEpicsList());
         System.out.println(taskManager.getAllSubTasksList());
         System.out.println(taskManager.getEpicAllSubTasks(2));
+
+        System.out.println("");
+        taskManager.getTask(0);
+        taskManager.getTask(1);
+        taskManager.getEpic(2);
+        taskManager.getSubTask(3);
+        taskManager.getSubTask(4); // 1
+        taskManager.getEpic(5); // 2
+        taskManager.getSubTask(6); // 3
+        taskManager.getTask(0); // 4
+        taskManager.getTask(1); // 5
+        taskManager.getEpic(2); // 6
+        taskManager.getSubTask(3); // 7
+        taskManager.getSubTask(4); // 8
+        taskManager.getEpic(5); // 9
+        taskManager.getSubTask(6); // 10
+        System.out.println(taskManager.historyManager.getHistory());
 
         System.out.println("");
         taskManager.getTask(0).setStatus(Status.DONE);
