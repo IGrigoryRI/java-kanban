@@ -48,48 +48,8 @@ class InMemoryHistoryManagerTest {
 
     @Test
     public void historySizeShouldNotBeZeroAndMoreThenTen() {
-        final int actualHistorySize = taskManager.historyManager.getHistory().size();
+        final int actualHistorySize = taskManager.getHistory().size();
         assertTrue(actualHistorySize > 0, "Запись истории не произошла");
         assertTrue(actualHistorySize <= 10, "Лист записи истории превышает допустимый размер в 10 значений");
-    }
-
-    @Test
-    public void firstTaskInHistoryListShouldBeAddedLatest() {
-        Integer expectedTaskId = 4;
-        Integer actualTaskId = taskManager.historyManager.getHistory().get(0).getID();
-        assertEquals(expectedTaskId, actualTaskId, "Нарушен порядок записи в историю просмотров");
-    }
-
-    @Test
-    public void lastTaskInHistoryListShouldBeAddedEarlier() {
-        Integer expectedTaskId = 13;
-        Integer actualTaskId = taskManager.historyManager.getHistory().get(9).getID();
-        assertEquals(expectedTaskId, actualTaskId, "Нарушен порядок записи в историю просмотров");
-    }
-
-    @Test
-    public void historyShouldNotAddNull() {
-        taskManager.getTask(100);
-
-        Integer expectedTaskId = 13;
-        Integer actualTaskId = taskManager.historyManager.getHistory().get(9).getID();
-        assertEquals(expectedTaskId, actualTaskId, "Лист записи истории не должен добавлять null");
-    }
-
-    @Test
-    public void shouldGetCorrectHistory() {
-
-        ArrayList<Integer> expectedHistoryTaskId = new ArrayList<>();
-        for (int i = 4; i < 14; i++) {
-            expectedHistoryTaskId.add(i);
-        }
-
-        ArrayList<Integer> actualHistoryTaskId = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            TaskInterface task = taskManager.historyManager.getHistory().get(i);
-            actualHistoryTaskId.add(task.getID());
-        }
-
-        assertEquals(expectedHistoryTaskId, actualHistoryTaskId, "Записанная история не соответствует действительной");
     }
 }

@@ -10,12 +10,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class InMemoryTaskManagerTest {
 
-    InMemoryTaskManager taskManager = new InMemoryTaskManager();
-
-    /*@BeforeEach
-    public void beforeEach() {
-        taskManager = new InMemoryTaskManager();
-    }*/
+    Managers manager = new Managers();
+    InMemoryTaskManager taskManager = manager.getDefault();
 
     @Test
     public void shouldAddNewTask() {

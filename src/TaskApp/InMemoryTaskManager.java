@@ -4,10 +4,11 @@ import java.util.HashMap;
 import java.util.ArrayList;
 
 public class InMemoryTaskManager implements TaskManager {
+    Managers managers = new Managers();
     private final HashMap<Integer, Task> tasks = new HashMap<>();
     private final HashMap<Integer, Epic> epics = new HashMap<>();
     private final HashMap<Integer, SubTask> subTasks = new HashMap<>();
-    public InMemoryHistoryManager<TaskInterface> historyManager = new InMemoryHistoryManager<>();
+    InMemoryHistoryManager historyManager = Managers.getDefaultHistory();
     private int id = 0;
 
     @Override
@@ -37,16 +38,25 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public ArrayList<Task> getAllTaskList() {
+        for (Task task: tasks.values()) {
+            historyManager.addHistory(task);
+        }
         return new ArrayList<>(tasks.values());
     }
 
     @Override
     public ArrayList<SubTask> getAllSubTasksList() {
+        for (SubTask subTask: subTasks.values()) {
+            historyManager.addHistory(subTask);
+        }
         return new ArrayList<>(subTasks.values());
     }
 
     @Override
     public ArrayList<Epic> getAllEpicsList() {
+        for (Epic epic: epics.values()) {
+            historyManager.addHistory(epic);
+        }
         return new ArrayList<>(epics.values());
     }
 
@@ -134,6 +144,10 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public void updateEpic(Epic epic) {
         epics.replace(epic.getID(), epic);
+    }
+
+    public ArrayList getHistory() {
+        return historyManager.getHistory();
     }
 
     private void createID() {

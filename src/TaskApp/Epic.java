@@ -21,4 +21,26 @@ public class Epic extends Task {
             }
         }
     }
+
+    @Override
+    public Epic copy() {
+        return new Epic(this);
+    }
+
+    @Override
+    public String toString() {
+        return "TaskApp.Epic{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", status=" + status +
+                ", subTasksID=" + subTasksID +
+                '}';
+    }
+
+    private Epic(Epic epic) {
+        super(epic.getName(), epic.getDescription());
+        this.status = epic.getStatus();
+        this.ID = epic.getID();
+        this.subTasksID = epic.getSubTasksID();
+    }
 }

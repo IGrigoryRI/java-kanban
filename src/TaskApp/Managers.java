@@ -2,11 +2,11 @@ package TaskApp;
 
 public final class Managers {
 
-    public static TaskManager getDefault() {
+    public static InMemoryTaskManager getDefault() {
         return new InMemoryTaskManager();
     }
 
-    public static HistoryManager<? extends TaskInterface> getDefaultHistory() {
+     public static InMemoryHistoryManager getDefaultHistory() {
         return new InMemoryHistoryManager();
     }
 }

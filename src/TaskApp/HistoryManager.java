@@ -2,8 +2,8 @@ package TaskApp;
 
 import java.util.ArrayList;
 
-public interface HistoryManager<T extends TaskInterface> {
-    ArrayList<T> getHistory();
+public interface HistoryManager {
+    ArrayList<? extends Task> getHistory();
 
-    void addHistory(T task);
+    void addHistory(Task task);
 }

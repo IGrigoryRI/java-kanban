@@ -29,5 +29,4 @@ class EpicTest {
 
         assertEquals(expectedId, actualId, "Возвращается некорректный список id подзадач эпика");
     }
-
 }
