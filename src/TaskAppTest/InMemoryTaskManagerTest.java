@@ -1,24 +1,25 @@
 package TaskAppTest;
 
-import TaskApp.*;
+import ManagersPackage.*;
+import TasksPackage.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class InMemoryTaskManagerTest {
 
-    Managers manager = new Managers();
-    InMemoryTaskManager taskManager = manager.getDefault();
+    TaskManager taskManager = Managers.getDefault();
 
     @Test
     public void shouldAddNewTask() {
         Task task = new Task("Задача", "Описание");
 
         taskManager.putNewTask(task);
-        final Task savedTask = taskManager.getTask(0);
+        final TaskInterface savedTask = taskManager.getTask(0);
 
         assertNotNull(savedTask, "Задача не найдена в списке задач");
         assertEquals(task, savedTask, "Задачи не совпадают");
@@ -29,7 +30,7 @@ class InMemoryTaskManagerTest {
         Epic epic = new Epic("Эпик", "Описание");
 
         taskManager.putNewEpic(epic);
-        final Epic savedEpic = taskManager.getEpic(0);
+        final EpicInterface savedEpic = taskManager.getEpic(0);
 
         assertNotNull(savedEpic, "Эпик не найден в списке эпиков");
         assertEquals(epic, savedEpic, "Эпики не совпадают");
@@ -42,10 +43,10 @@ class InMemoryTaskManagerTest {
         subTask.setStatus(Status.DONE);
 
         taskManager.putNewSubTask(subTask);
-        final SubTask savedSubTask = taskManager.getSubTask(1);
+        final SubTaskInterface savedSubTask = taskManager.getSubTask(1);
 
-        final ArrayList<Integer> actualSubTaskIdInEpic = taskManager.getEpic(0).getSubTasksID();
-        final ArrayList<Integer> expectedSubTaskIdInEpic = new ArrayList<>();
+        final List<Integer> actualSubTaskIdInEpic = taskManager.getEpic(0).getSubTasksID();
+        final List<Integer> expectedSubTaskIdInEpic = new ArrayList<>();
         expectedSubTaskIdInEpic.add(taskManager.getSubTask(1).getID());
 
         final int epicId = taskManager.getEpic(0).getID();
@@ -77,7 +78,7 @@ class InMemoryTaskManagerTest {
         taskManager.putNewTask(task1);
         taskManager.putNewTask(task2);
         taskManager.putNewTask(task3);
-        ArrayList<Task> actualTaskList = taskManager.getAllTaskList();
+        List<TaskInterface> actualTaskList = taskManager.getAllTaskList();
 
         assertEquals(expectedTaskList, actualTaskList, "Выводится некорректный список всех задач");
 
@@ -97,7 +98,7 @@ class InMemoryTaskManagerTest {
         taskManager.putNewEpic(epic1);
         taskManager.putNewEpic(epic2);
         taskManager.putNewEpic(epic3);
-        ArrayList<Epic> actualEpicList = taskManager.getAllEpicsList();
+        List<EpicInterface> actualEpicList = taskManager.getAllEpicsList();
 
         assertEquals(expectedEpicList, actualEpicList, "Выводится некорректный список всех эпиков");
 
@@ -119,7 +120,7 @@ class InMemoryTaskManagerTest {
         taskManager.putNewSubTask(subTask1);
         taskManager.putNewSubTask(subTask2);
         taskManager.putNewSubTask(subTask3);
-        ArrayList<SubTask> actualSubTaskList = taskManager.getAllSubTasksList();
+        List<SubTaskInterface> actualSubTaskList = taskManager.getAllSubTasksList();
 
         assertEquals(expectedSubTaskList, actualSubTaskList, "Выводится некорректный список всех подзадач");
 
@@ -142,7 +143,7 @@ class InMemoryTaskManagerTest {
         taskManager.putNewSubTask(subTask1);
         taskManager.putNewSubTask(subTask2);
         taskManager.putNewSubTask(subTask3);
-        ArrayList<SubTask> actualSubTaskList = taskManager.getEpicAllSubTasks(1);
+        List<SubTaskInterface> actualSubTaskList = taskManager.getEpicAllSubTasks(1);
 
         assertEquals(expectedSubTaskList, actualSubTaskList, "Выводится некорректный список всех подзадач эпика");
 

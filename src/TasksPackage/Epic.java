@@ -1,19 +1,22 @@
-package TaskApp;
+package TasksPackage;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class Epic extends Task {
+public class Epic extends Task implements EpicInterface {
 
-    protected ArrayList<Integer> subTasksID = new ArrayList<>();
+    protected List<Integer> subTasksID = new ArrayList<>();
 
     public Epic(String name, String description) {
         super(name, description);
     }
 
-    public ArrayList<Integer> getSubTasksID() {
+    @Override
+    public List<Integer> getSubTasksID() {
         return subTasksID;
     }
 
+    @Override
     public void deleteSubTaskID(int subTaskID) {
         for (int i = 0; i < subTasksID.size(); i++) {
             if (subTasksID.get(i) == subTaskID) {

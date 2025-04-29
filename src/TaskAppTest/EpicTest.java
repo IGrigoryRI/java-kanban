@@ -1,11 +1,12 @@
 package TaskAppTest;
 
-import TaskApp.Epic;
-import TaskApp.InMemoryTaskManager;
-import TaskApp.SubTask;
+import TasksPackage.Epic;
+import ManagersPackage.InMemoryTaskManager;
+import TasksPackage.SubTask;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -25,7 +26,7 @@ class EpicTest {
         taskManager.putNewSubTask(new SubTask("Сабтаск 2 Эпика 1", "Описание 1", 0)); // 2
         taskManager.putNewSubTask(new SubTask("Сабтаск 3 Эпика 1", "Описание 1", 0)); // 3
 
-        ArrayList<Integer> actualId = taskManager.getEpic(0).getSubTasksID();
+        List<Integer> actualId = taskManager.getEpic(0).getSubTasksID();
 
         assertEquals(expectedId, actualId, "Возвращается некорректный список id подзадач эпика");
     }
