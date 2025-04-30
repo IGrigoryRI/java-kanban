@@ -1,21 +1,20 @@
 package ManagersPackage;
 
-import TasksPackage.TaskInterface;
-
 import java.util.List;
 import java.util.ArrayList;
+import TasksPackage.*;
 
-public class InMemoryHistoryManager implements HistoryManager {
+class InMemoryHistoryManager implements HistoryManager {
 
-    public List<TaskInterface> history = new ArrayList<>();
+    private List<Task> history = new ArrayList<>();
 
     @Override
-    public List<TaskInterface> getHistory() {
+    public List<Task> getHistory() {
         return history;
     }
 
     @Override
-    public void addHistory(TaskInterface task) {
+    public void addHistory(Task task) {
         if (history.size() > 9) {
             history.removeFirst();
             history.add(task.copy());

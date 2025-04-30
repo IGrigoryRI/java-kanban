@@ -1,6 +1,6 @@
 package TasksPackage;
 
-public class SubTask extends Task implements SubTaskInterface {
+public class SubTask extends Task {
     protected Integer epicID;
 
     public SubTask(String name, String description, int epicID) {
@@ -8,7 +8,6 @@ public class SubTask extends Task implements SubTaskInterface {
         this.epicID = epicID;
     }
 
-    @Override
     public Integer getEpicID() {
         return epicID;
     }

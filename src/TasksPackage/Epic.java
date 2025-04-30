@@ -3,7 +3,7 @@ package TasksPackage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Epic extends Task implements EpicInterface {
+public class Epic extends Task {
 
     protected List<Integer> subTasksID = new ArrayList<>();
 
@@ -11,12 +11,10 @@ public class Epic extends Task implements EpicInterface {
         super(name, description);
     }
 
-    @Override
     public List<Integer> getSubTasksID() {
         return subTasksID;
     }
 
-    @Override
     public void deleteSubTaskID(int subTaskID) {
         for (int i = 0; i < subTasksID.size(); i++) {
             if (subTasksID.get(i) == subTaskID) {
@@ -25,12 +23,10 @@ public class Epic extends Task implements EpicInterface {
         }
     }
 
-    @Override
     public Epic copy() {
         return new Epic(this);
     }
 
-    @Override
     public String toString() {
         return "TaskApp.Epic{" +
                 "name='" + name + '\'' +
