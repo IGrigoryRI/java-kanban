@@ -1,4 +1,4 @@
-package tests.tasks;
+package tasks;
 
 import tasks.Epic;
 import managers.InMemoryTaskManager;
