@@ -1,7 +1,7 @@
-package TaskAppTest;
+package tests;
 
-import ManagersPackage.*;
-import TasksPackage.*;
+import managers.*;
+import tasks.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

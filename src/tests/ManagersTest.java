@@ -1,8 +1,8 @@
-package TaskAppTest;
+package tests;
 
-import ManagersPackage.HistoryManager;
-import ManagersPackage.Managers;
-import ManagersPackage.TaskManager;
+import managers.HistoryManager;
+import managers.Managers;
+import managers.TaskManager;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

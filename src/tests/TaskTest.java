@@ -1,8 +1,8 @@
-package TaskAppTest;
+package tests;
 
-import ManagersPackage.InMemoryTaskManager;
-import ManagersPackage.Status;
-import TasksPackage.Task;
+import managers.InMemoryTaskManager;
+import managers.Status;
+import tasks.Task;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

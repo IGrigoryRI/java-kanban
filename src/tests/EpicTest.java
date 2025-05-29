@@ -1,9 +1,8 @@
-package TaskAppTest;
+package tests;
 
-import TasksPackage.Epic;
-import ManagersPackage.InMemoryTaskManager;
-import TasksPackage.SubTask;
-import org.junit.jupiter.api.BeforeAll;
+import tasks.Epic;
+import managers.InMemoryTaskManager;
+import tasks.SubTask;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

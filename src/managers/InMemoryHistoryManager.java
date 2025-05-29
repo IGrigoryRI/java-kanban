@@ -1,8 +1,8 @@
-package ManagersPackage;
+package managers;
 
 import java.util.*;
 
-import TasksPackage.*;
+import tasks.*;
 
 class InMemoryHistoryManager implements HistoryManager {
     private static class Node {

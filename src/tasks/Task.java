@@ -1,6 +1,6 @@
-package TasksPackage;
+package tasks;
 
-import ManagersPackage.Status;
+import managers.Status;
 
 import java.util.Objects;
 
