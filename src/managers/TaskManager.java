@@ -14,6 +14,7 @@ public interface TaskManager {
     List<Task> getAllTaskList();
 
     List<SubTask> getAllSubTasksList();
+
     List<Epic> getAllEpicsList();
 
     List<SubTask> getEpicAllSubTasks(int epicId);
