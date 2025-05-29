@@ -37,8 +37,8 @@ class InMemoryHistoryManager implements HistoryManager {
             return;
         }
 
-        if (history.containsKey(task.getID())) {
-            removeNode(history.get(task.getID()));
+        if (history.containsKey(task.getId())) {
+            removeNode(history.get(task.getId()));
         }
         linkLast(task);
     }
@@ -60,7 +60,7 @@ class InMemoryHistoryManager implements HistoryManager {
             newNode.prev = tail;
             tail = newNode;
         }
-        history.put(task.getID(), newNode);
+        history.put(task.getId(), newNode);
     }
 
     //@Override
@@ -81,6 +81,6 @@ class InMemoryHistoryManager implements HistoryManager {
             tail = node.prev;
         }
 
-        history.remove(node.task.getID());
+        history.remove(node.task.getId());
     }
 }

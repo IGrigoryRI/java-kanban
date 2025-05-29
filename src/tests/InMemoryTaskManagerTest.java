@@ -45,12 +45,12 @@ class InMemoryTaskManagerTest {
         taskManager.putNewSubTask(subTask);
         final SubTask savedSubTask = taskManager.getSubTask(1);
 
-        final List<Integer> actualSubTaskIdInEpic = taskManager.getEpic(0).getSubTasksID();
+        final List<Integer> actualSubTaskIdInEpic = taskManager.getEpic(0).getSubTasksId();
         final List<Integer> expectedSubTaskIdInEpic = new ArrayList<>();
-        expectedSubTaskIdInEpic.add(taskManager.getSubTask(1).getID());
+        expectedSubTaskIdInEpic.add(taskManager.getSubTask(1).getId());
 
-        final int epicId = taskManager.getEpic(0).getID();
-        final int epicIdInSubtask = subTask.getEpicID();
+        final int epicId = taskManager.getEpic(0).getId();
+        final int epicIdInSubtask = subTask.getEpicId();
 
         Status expectedEpicStatus = Status.DONE;
         Status actualEpicStatus = taskManager.getEpic(0).getStatus();
@@ -235,8 +235,8 @@ class InMemoryTaskManagerTest {
         taskManager.putNewTask(new Task("Задача1", "Описание")); // 0
         taskManager.putNewTask(new Task("Задача2", "Описание")); // 1
 
-        int actualIdInFirstTask = taskManager.getTask(0).getID();
-        int actualIdInSecondTask = taskManager.getTask(1).getID();
+        int actualIdInFirstTask = taskManager.getTask(0).getId();
+        int actualIdInSecondTask = taskManager.getTask(1).getId();
 
         assertTrue(actualIdInFirstTask == 0, "Id для первой задачи не был записан");
         assertTrue(actualIdInSecondTask == 1, "Id для второй задачи не был записан");

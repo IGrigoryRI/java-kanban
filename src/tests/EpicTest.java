@@ -29,7 +29,7 @@ class EpicTest {
         expectedId.add(2);
         expectedId.add(3);
 
-        List<Integer> actualId = taskManager.getEpic(0).getSubTasksID();
+        List<Integer> actualId = taskManager.getEpic(0).getSubTasksId();
 
         assertEquals(expectedId, actualId, "Возвращается некорректный список id подзадач эпика");
     }
@@ -42,7 +42,7 @@ class EpicTest {
 
         taskManager.deleteSubTask(3);
 
-        List<Integer> actualId = taskManager.getEpic(0).getSubTasksID();
+        List<Integer> actualId = taskManager.getEpic(0).getSubTasksId();
 
         assertEquals(expectedId, actualId, "Удаление subTask не приводит к удалению его ID из его epic");
     }

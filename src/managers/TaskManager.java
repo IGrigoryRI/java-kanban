@@ -16,19 +16,19 @@ public interface TaskManager {
     List<SubTask> getAllSubTasksList();
     List<Epic> getAllEpicsList();
 
-    List<SubTask> getEpicAllSubTasks(int epicID);
+    List<SubTask> getEpicAllSubTasks(int epicId);
 
-    Task getTask(int taskID);
+    Task getTask(int taskId);
 
-    Epic getEpic(int epicID);
+    Epic getEpic(int epicId);
 
-    SubTask getSubTask(int subTaskID);
+    SubTask getSubTask(int subTaskId);
 
-    void deleteTask(Integer taskID);
+    void deleteTask(Integer taskId);
 
-    void deleteEpic(Integer epicID);
+    void deleteEpic(Integer epicId);
 
-    void deleteSubTask(Integer subTaskID);
+    void deleteSubTask(Integer subTaskId);
 
     void clearTasks();
 

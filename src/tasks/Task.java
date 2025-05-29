@@ -8,7 +8,7 @@ public class Task {
     protected String name;
     protected String description;
     protected Status status = Status.NEW;
-    protected Integer ID;
+    protected Integer id;
 
     public Task(String name, String description) {
         this.name = name;
@@ -39,12 +39,12 @@ public class Task {
         this.name = name;
     }
 
-    public Integer getID() {
-        return ID;
+    public Integer getId() {
+        return id;
     }
 
-    public void setID(Integer ID) {
-        this.ID = ID;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Task copy() {
@@ -62,17 +62,17 @@ public class Task {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Task task = (Task) o;
-        return Objects.equals(name, task.name) && Objects.equals(description, task.description) && status == task.status && Objects.equals(ID, task.ID);
+        return Objects.equals(name, task.name) && Objects.equals(description, task.description) && status == task.status && Objects.equals(id, task.id);
     }
 
     public int hashCode() {
-        return Objects.hash(name, description, status, ID);
+        return Objects.hash(name, description, status, id);
     }
 
     private Task(Task task) {
         this.name = task.getName();
         this.description = task.getDescription();
         this.status = task.getStatus();
-        this.ID = task.getID();
+        this.id = task.getId();
     }
 }

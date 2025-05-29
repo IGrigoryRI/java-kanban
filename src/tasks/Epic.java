@@ -5,20 +5,20 @@ import java.util.List;
 
 public class Epic extends Task {
 
-    protected List<Integer> subTasksID = new ArrayList<>();
+    protected List<Integer> subTasksId = new ArrayList<>();
 
     public Epic(String name, String description) {
         super(name, description);
     }
 
-    public List<Integer> getSubTasksID() {
-        return subTasksID;
+    public List<Integer> getSubTasksId() {
+        return subTasksId;
     }
 
-    public void deleteSubTaskID(int subTaskID) {
-        for (int i = 0; i < subTasksID.size(); i++) {
-            if (subTasksID.get(i) == subTaskID) {
-                subTasksID.remove(i);
+    public void deleteSubTaskId(int subTaskID) {
+        for (int i = 0; i < subTasksId.size(); i++) {
+            if (subTasksId.get(i) == subTaskID) {
+                subTasksId.remove(i);
             }
         }
     }
@@ -32,14 +32,14 @@ public class Epic extends Task {
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", status=" + status +
-                ", subTasksID=" + subTasksID +
+                ", subTasksID=" + subTasksId +
                 '}';
     }
 
     private Epic(Epic epic) {
         super(epic.getName(), epic.getDescription());
         this.status = epic.getStatus();
-        this.ID = epic.getID();
-        this.subTasksID = epic.getSubTasksID();
+        this.id = epic.getId();
+        this.subTasksId = epic.getSubTasksId();
     }
 }
