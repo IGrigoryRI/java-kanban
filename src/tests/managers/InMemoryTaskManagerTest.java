@@ -1,4 +1,4 @@
-package tests;
+package tests.managers;
 
 import managers.*;
 import tasks.*;
