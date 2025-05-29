@@ -15,12 +15,11 @@ class SubTaskTest {
 
         Integer expectedEpicId = 0;
 
-        taskManager.putNewEpic(new Epic("Эпик 1","Описание 1")); // 0
-        taskManager.putNewSubTask(new SubTask("Сабтаск 1 Эпика 1", "Описание 1", 0)); // 1
+        taskManager.putNewEpic(new Epic("Эпик 1","Описание 1"));
+        taskManager.putNewSubTask(new SubTask("Сабтаск 1 Эпика 1", "Описание 1", 0));
 
         Integer actualEpicID = taskManager.getSubTask(1).getEpicID();
 
         assertEquals(expectedEpicId, actualEpicID, "Возвращается некорректное значение id эпика подзадачи");
     }
-  
 }
