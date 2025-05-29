@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TaskTest {
-    private final static InMemoryTaskManager taskManager = new InMemoryTaskManager();
+    private static InMemoryTaskManager taskManager = new InMemoryTaskManager();
 
     @BeforeAll
     public static void beforeAll() {
