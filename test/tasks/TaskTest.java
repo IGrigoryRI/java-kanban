@@ -1,8 +1,8 @@
-package TaskAppTest;
+package tasks;
 
-import ManagersPackage.InMemoryTaskManager;
-import ManagersPackage.Status;
-import TasksPackage.Task;
+import managers.InMemoryTaskManager;
+import managers.Status;
+import tasks.Task;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TaskTest {
-    private final static InMemoryTaskManager taskManager = new InMemoryTaskManager();
+    private static InMemoryTaskManager taskManager = new InMemoryTaskManager();
 
     @BeforeAll
     public static void beforeAll() {
@@ -22,7 +22,7 @@ class TaskTest {
         taskManager.getTask(0).setName("Задача 1");
         taskManager.getTask(0).setDescription("Описание 1");
         taskManager.getTask(0).setStatus(Status.NEW);
-        taskManager.getTask(0).setID(0);
+        taskManager.getTask(0).setId(0);
     }
 
     @Test
@@ -73,15 +73,15 @@ class TaskTest {
     @Test
     public void shouldGetCorrectId() {
         Integer expectedId = 0;
-        Integer actualId = taskManager.getTask(0).getID();
+        Integer actualId = taskManager.getTask(0).getId();
         assertEquals(expectedId, actualId, "Возвращается некорректное id задачи");
     }
 
     @Test
     public void shouldSetCorrectId() {
         Integer expectedId = 1;
-        taskManager.getTask(0).setID(1);
-        Integer actualId = taskManager.getTask(0).getID();
+        taskManager.getTask(0).setId(1);
+        Integer actualId = taskManager.getTask(0).getId();
         assertEquals(expectedId, actualId, "Id задачи устанавливается некорректно");
     }
 }

@@ -1,15 +1,22 @@
-package TasksPackage;
+package tasks;
+
+import managers.TaskType;
 
 public class SubTask extends Task {
-    protected Integer epicID;
+    protected Integer epicId;
 
-    public SubTask(String name, String description, int epicID) {
+    public SubTask(String name, String description, int epicId) {
         super(name, description);
-        this.epicID = epicID;
+        this.epicId = epicId;
+        this.taskType = TaskType.SUBTASK;
     }
 
-    public Integer getEpicID() {
-        return epicID;
+    public Integer getEpicId() {
+        return epicId;
+    }
+
+    public void setEpicId(Integer epicId) {
+        this.epicId = epicId;
     }
 
     @Override
@@ -18,7 +25,7 @@ public class SubTask extends Task {
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", status=" + status +
-                ", epicID=" + epicID +
+                ", epicID=" + epicId +
                 '}';
     }
 
@@ -31,7 +38,8 @@ public class SubTask extends Task {
     private SubTask(SubTask subTask) {
         super(subTask.getName(), subTask.getDescription());
         this.status = subTask.getStatus();
-        this.ID = subTask.getID();
-        this.epicID = subTask.getEpicID();
+        this.id = subTask.getId();
+        this.epicId = subTask.getEpicId();
+        this.taskType = subTask.getType();
     }
 }
