@@ -1,6 +1,7 @@
 package tasks;
 
 import managers.Status;
+import managers.TaskType;
 
 import java.util.Objects;
 
@@ -9,6 +10,7 @@ public class Task {
     protected String description;
     protected Status status = Status.NEW;
     protected Integer id;
+    protected TaskType taskType = TaskType.TASK;
 
     public Task(String name, String description) {
         this.name = name;
@@ -51,6 +53,14 @@ public class Task {
         return new Task(this);
     }
 
+    public TaskType getType() {
+        return this.taskType;
+    }
+
+    public void setTaskType(TaskType taskType) {
+        this.taskType = taskType;
+    }
+
     public String toString() {
         return "TaskApp.Task{" +
                 "name='" + name + '\'' +
@@ -74,5 +84,6 @@ public class Task {
         this.description = task.getDescription();
         this.status = task.getStatus();
         this.id = task.getId();
+        this.taskType = task.getType();
     }
 }

@@ -135,7 +135,6 @@ public class InMemoryTaskManager implements TaskManager {
 
         epics.clear();
         subTasks.clear();
-
     }
 
     @Override
@@ -172,6 +171,24 @@ public class InMemoryTaskManager implements TaskManager {
 
     public List<? extends Task> getHistory() {
         return historyManager.getHistory();
+    }
+
+    protected List<Task> getAll() {
+        List<Task> allTasks = new ArrayList<>();
+        allTasks.addAll(tasks.values());
+        allTasks.addAll(epics.values());
+        allTasks.addAll(subTasks.values());
+        return allTasks;
+    }
+
+    protected void loadAll(List<Task> allTasks) {
+        for (Task task : allTasks) {
+            switch (task.getType()) {
+                case TASK -> tasks.put(task.getId(), task);
+                case EPIC -> epics.put(task.getId(), (Epic) task);
+                case SUBTASK -> subTasks.put(task.getId(), (SubTask) task);
+            }
+        }
     }
 
     private void createID() {

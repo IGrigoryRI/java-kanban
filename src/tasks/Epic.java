@@ -1,5 +1,7 @@
 package tasks;
 
+import managers.TaskType;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +11,7 @@ public class Epic extends Task {
 
     public Epic(String name, String description) {
         super(name, description);
+        this.taskType = TaskType.EPIC;
     }
 
     public List<Integer> getSubTasksId() {
@@ -27,6 +30,10 @@ public class Epic extends Task {
         return new Epic(this);
     }
 
+    public void setSubTasksId(ArrayList<Integer> subTasksId) {
+        this.subTasksId = subTasksId;
+    }
+
     public String toString() {
         return "TaskApp.Epic{" +
                 "name='" + name + '\'' +
@@ -41,5 +48,6 @@ public class Epic extends Task {
         this.status = epic.getStatus();
         this.id = epic.getId();
         this.subTasksId = epic.getSubTasksId();
+        this.taskType = epic.getType();
     }
 }
