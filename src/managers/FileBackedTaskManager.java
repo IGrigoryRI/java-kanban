@@ -11,12 +11,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class FileBackedTaskManager extends InMemoryTaskManager {
+    private static final String HEAD = "id,type,name,status,description,epic";
+
     public FileBackedTaskManager() {
         createFile();
         load();
     }
-
-    private static final String HEAD = "id,type,name,status,description,epic";
 
     @Override
     public void putNewTask(Task newTask) {
@@ -72,7 +72,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         save();
     }
 
-    public void save() {
+    private void save() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("tasks.csv"))) {
             writer.write(HEAD);
             writer.newLine();
@@ -87,7 +87,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         }
     }
 
-    public void load() {
+    private void load() {
         try {
             String data = Files.readString(Path.of("tasks.csv"));
             String[] dataLines = data.split("\n");
@@ -105,7 +105,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         }
     }
 
-    public static String taskToString(Task task) throws ManagerSaveException {
+    private static String taskToString(Task task) throws ManagerSaveException {
         switch (task.getType()) {
             case TASK -> {
                 return String.format("%d,%s,%s,%s,%s,",
@@ -142,7 +142,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         }
     }
 
-    public static Task taskFromString(String line) {
+    private static Task taskFromString(String line) {
         String[] stringToTask = line.split(",");
         TaskType taskType = TaskType.valueOf(stringToTask[1]);
 
@@ -184,7 +184,6 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
                 default -> throw new ManagerSaveException("Неизвестный тип задачи");
             }
         } catch (Exception exception) {
-
             throw new IllegalArgumentException("Ошибка чтения задачи. Некорректные данные");
         }
     }

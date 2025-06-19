@@ -31,8 +31,9 @@ class FileBackedTaskManagerTest {
 
     @Test
     void managerMustSaveAndLoadEmptyFile() {
-        taskManager.save();
-        taskManager.load();
+        taskManager.putNewTask(new Task("Задача 1", "Описание 1"));
+        taskManager.deleteTask(0);
+        taskManager = new FileBackedTaskManager();
 
         assertTrue(taskManager.getAll().isEmpty(), "Список задач должен быть пуст");
     }
@@ -63,7 +64,7 @@ class FileBackedTaskManagerTest {
         taskManager.clearEpics();
         taskManager.clearSubTasks();
 
-        taskManager.load();
+        taskManager = new FileBackedTaskManager();
 
         assertTrue(taskManager.getAll().isEmpty(), "После очистки список задач должен быть пуст");
     }
