@@ -1,6 +1,5 @@
 package tasks;
 
-import managers.Status;
 import managers.TaskType;
 
 import java.time.Duration;
