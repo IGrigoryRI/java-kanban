@@ -1,10 +1,12 @@
 package managers;
 
-import managers.*;
 import tasks.Task;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,8 +17,10 @@ class InMemoryHistoryManagerTest {
 
     @BeforeEach
     public void beforeEach() {
-        taskManager.putNewTask(new Task("Задача 1", "Описание")); // 0
-        taskManager.putNewTask(new Task("Задача 2", "Описание")); // 1
+        taskManager.putNewTask(new Task("Task 1", "Description",
+                Duration.ofHours(1), LocalDateTime.of(1999, 3, 12, 23, 5))); // 0
+        taskManager.putNewTask(new Task("Task 1", "Description",
+                Duration.ofHours(1), LocalDateTime.of(1999, 3, 12, 21, 5))); // 1
         taskManager.getTask(0);
         taskManager.getTask(1);
     }

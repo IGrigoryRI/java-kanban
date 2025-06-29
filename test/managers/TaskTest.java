@@ -1,11 +1,12 @@
-package tasks;
+package managers;
 
-import managers.InMemoryTaskManager;
-import managers.Status;
 import tasks.Task;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.time.Duration;
+import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,7 +15,9 @@ class TaskTest {
 
     @BeforeAll
     public static void beforeAll() {
-        taskManager.putNewTask(new Task("Задача 1", "Описание 1")); // 0
+        taskManager.putNewTask(new Task("Задача 1", "Описание 1",
+                Duration.ofHours(2),
+                LocalDateTime.of(2023, 10, 1, 9, 0))); // 0
     }
 
     @BeforeEach
