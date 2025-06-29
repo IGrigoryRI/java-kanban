@@ -9,9 +9,11 @@ import java.util.List;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.Duration;
+import java.time.LocalDateTime;
 
 public class FileBackedTaskManager extends InMemoryTaskManager {
-    private static final String HEAD = "id,type,name,status,description,epic";
+    private static final String HEAD = "id,type,name,status,description,startTime,duration,epic";
 
     public FileBackedTaskManager() {
         createFile();
@@ -108,12 +110,14 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     private static String taskToString(Task task) throws ManagerSaveException {
         switch (task.getType()) {
             case TASK -> {
-                return String.format("%d,%s,%s,%s,%s,",
+                return String.format("%d,%s,%s,%s,%s,%s,%d",
                         task.getId(),
                         task.getType(),
                         task.getName(),
                         task.getStatus(),
-                        task.getDescription());
+                        task.getDescription(),
+                        task.getStartTime(),
+                        task.getDuration().toMinutes());
             }
 
             case EPIC -> {
@@ -130,12 +134,14 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
             case SUBTASK -> {
                 SubTask subTask = (SubTask) task;
 
-                return String.format("%d,%s,%s,%s,%s,%d,",
+                return String.format("%d,%s,%s,%s,%s,%s,%s,%d",
                         subTask.getId(),
                         subTask.getType(),
                         subTask.getName(),
                         subTask.getStatus(),
                         subTask.getDescription(),
+                        subTask.getStartTime(),
+                        subTask.getDuration().toMinutes(),
                         subTask.getEpicId());
             }
             default -> throw new ManagerSaveException("Неизвестный тип задачи");
@@ -143,13 +149,16 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     }
 
     private static Task taskFromString(String line) {
-        String[] stringToTask = line.split(",");
+        String[] stringToTask = line.trim().split(",");
         TaskType taskType = TaskType.valueOf(stringToTask[1]);
 
         try {
             switch (taskType) {
                 case TASK -> {
-                    Task task = new Task(stringToTask[2], stringToTask[4]);
+                    LocalDateTime startTime = LocalDateTime.parse(stringToTask[5]);
+                    Duration duration = Duration.ofMinutes(Integer.parseInt(stringToTask[6]));
+
+                    Task task = new Task(stringToTask[2], stringToTask[4], duration, startTime);
 
                     task.setTaskType(taskType);
                     task.setId(Integer.valueOf(stringToTask[0]));
@@ -169,10 +178,15 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
                 }
 
                 case SUBTASK -> {
+                    LocalDateTime startTime = LocalDateTime.parse(stringToTask[5]);
+                    Duration duration = Duration.ofMinutes(Integer.parseInt(stringToTask[6]));
+
                     SubTask subTask = new SubTask(
                             stringToTask[2],
                             stringToTask[4],
-                            Integer.valueOf(stringToTask[5].trim()));
+                            duration,
+                            startTime,
+                            Integer.valueOf(stringToTask[7].trim()));
 
                     subTask.setTaskType(taskType);
                     subTask.setId(Integer.valueOf(stringToTask[0]));
@@ -192,7 +206,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         Path path = Path.of("tasks.csv");
         if (!Files.exists(path)) {
             try {
-                Files.writeString(path, "id,type,name,status,description,epic\n");
+                Files.writeString(path, HEAD + "\n");
             } catch (IOException e) {
                 System.err.println("Не удалось создать файл tasks.csv: " + e.getMessage());
             }

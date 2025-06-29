@@ -7,19 +7,25 @@ import tasks.Task;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class FileBackedTaskManagerTest {
+class FileBackedTaskManagerTest extends TaskManagerTest<FileBackedTaskManager> {
 
     private File tempFile;
-    private FileBackedTaskManager taskManager;
+
+    @Override
+    protected FileBackedTaskManager createTaskManager() {
+        return new FileBackedTaskManager();
+    }
 
     @BeforeEach
     void beforeEach() throws IOException {
         tempFile = File.createTempFile("tasks", ".csv");
-        taskManager = new FileBackedTaskManager();
+        taskManager = createTaskManager();
     }
 
     @AfterEach
@@ -31,7 +37,8 @@ class FileBackedTaskManagerTest {
 
     @Test
     void managerMustSaveAndLoadEmptyFile() {
-        taskManager.putNewTask(new Task("Задача 1", "Описание 1"));
+        taskManager.putNewTask(new Task("Задача 1", "Описание 1",
+                Duration.ofHours(1), LocalDateTime.of(1999, 3, 12, 23, 5)));
         taskManager.deleteTask(0);
         taskManager = new FileBackedTaskManager();
 
@@ -40,9 +47,11 @@ class FileBackedTaskManagerTest {
 
     @Test
     void tasksShouldSaveAndLoad() {
-        taskManager.putNewTask(new Task("Задача 1", "Описание 1"));
+        taskManager.putNewTask(new Task("Задача 1", "Описание 1",
+                Duration.ofHours(1), LocalDateTime.of(1999, 3, 12, 23, 5)));
         taskManager.putNewEpic(new Epic("Эпик 1", "Описание 2"));
-        taskManager.putNewSubTask(new SubTask("Подзадача 1", "Описание 3", 1));
+        taskManager.putNewSubTask(new SubTask("Подзадача 1", "Описание 3",
+                Duration.ofHours(1), LocalDateTime.of(1999, 3, 12, 21, 5), 1));
 
         FileBackedTaskManager newManager = new FileBackedTaskManager();
 
@@ -56,9 +65,11 @@ class FileBackedTaskManagerTest {
 
     @Test
     void testSaveAndLoadWithClearOperations() {
-        taskManager.putNewTask(new Task("Задача 1", "Описание 1"));
+        taskManager.putNewTask(new Task("Задача 1", "Описание 1",
+                Duration.ofHours(1), LocalDateTime.of(1999, 3, 12, 23, 5)));
         taskManager.putNewEpic(new Epic("Эпик 1", "Описание 2"));
-        taskManager.putNewSubTask(new SubTask("Подзадача 1", "Описание 3", 1));
+        taskManager.putNewSubTask(new SubTask("Подзадача 1", "Описание 3",
+                Duration.ofHours(1), LocalDateTime.of(1999, 3, 12, 21, 5), 1));
 
         taskManager.clearTasks();
         taskManager.clearEpics();

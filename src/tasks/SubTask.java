@@ -1,12 +1,16 @@
 package tasks;
 
+import managers.Status;
 import managers.TaskType;
+
+import java.time.Duration;
+import java.time.LocalDateTime;
 
 public class SubTask extends Task {
     protected Integer epicId;
 
-    public SubTask(String name, String description, int epicId) {
-        super(name, description);
+    public SubTask(String name, String description, Duration duration, LocalDateTime startTime, int epicId) {
+        super(name, description, duration, startTime);
         this.epicId = epicId;
         this.taskType = TaskType.SUBTASK;
     }
@@ -15,8 +19,9 @@ public class SubTask extends Task {
         return epicId;
     }
 
-    public void setEpicId(Integer epicId) {
-        this.epicId = epicId;
+    @Override
+    public SubTask copy() {
+        return new SubTask(this);
     }
 
     @Override
@@ -25,21 +30,19 @@ public class SubTask extends Task {
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", status=" + status +
+                ", startTime=" + startTime +
+                ", duration=" + duration +
                 ", epicID=" + epicId +
-                '}';
-    }
-
-
-    @Override
-    public SubTask copy() {
-        return new SubTask(this);
+                '}' + "\n";
     }
 
     private SubTask(SubTask subTask) {
-        super(subTask.getName(), subTask.getDescription());
+        super(subTask.getName(), subTask.getDescription(), subTask.getDuration(), subTask.getStartTime());
         this.status = subTask.getStatus();
         this.id = subTask.getId();
         this.epicId = subTask.getEpicId();
         this.taskType = subTask.getType();
+        this.duration = subTask.getDuration();
+        this.startTime = subTask.getStartTime();
     }
 }
