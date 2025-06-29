@@ -122,7 +122,7 @@ public class Task implements Comparable<Task> {
     }
 
     protected Task(String name, String description) {
-        this.name= name;
+        this.name = name;
         this.description = description;
     }
 
