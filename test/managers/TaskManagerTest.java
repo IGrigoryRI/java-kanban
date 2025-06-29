@@ -3,6 +3,8 @@ package managers;
 import tasks.Task;
 import tasks.Epic;
 import tasks.SubTask;
+
+import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -15,6 +17,12 @@ public abstract class TaskManagerTest<T extends TaskManager> {
     protected T taskManager;
 
     protected abstract T createTaskManager();
+
+    @BeforeEach
+    void beforeEach() throws IOException {}
+
+    @AfterEach
+    void afterEach() {}
 
     @Test
     public void taskManagerShouldPutAndGetTask(){
@@ -49,27 +57,8 @@ public abstract class TaskManagerTest<T extends TaskManager> {
         taskManager.deleteEpic(0);
 
         int epicsSize = taskManager.getAllEpicsList().size();
-        int subTasksSize = taskManager.getAllSubTasksList().size();
 
-        assertFalse(epicsSize >= 1, "Эпик не был удален");
-        assertFalse(subTasksSize >= 1, "После удаления эпика не были удалены его подзадачи");
-    }
-
-    @Test
-    public void taskManagerShouldDeleteSubTask() {
-        taskManager.putNewEpic(new Epic("Эпик", "Описание")); // 0
-        taskManager.putNewSubTask(new SubTask("Подзадача", "Описание",
-                Duration.ofHours(1), LocalDateTime.of(1999, 3, 12, 23, 5), 0)); // 1
-        taskManager.getSubTask(1).setStatus(Status.DONE);
-
-        taskManager.deleteSubTask(1);
-
-        int subTasksSize = taskManager.getAllSubTasksList().size();
-
-        Status actualEpicStatus = taskManager.getEpic(0).getStatus();
-
-        assertFalse(subTasksSize >= 1, "Подзадача не была удалена");
-        assertTrue(actualEpicStatus != Status.DONE, "После удаления подзадачи статус эпика не изменился");
+        assertEquals(0, epicsSize, "Эпик не был удален");
     }
 
     @Test

@@ -204,13 +204,7 @@ public class InMemoryTaskManager implements TaskManager {
         for (Task task : allTasks) {
             switch (task.getType()) {
                 case TASK -> tasks.put(task.getId(), task);
-                case SUBTASK -> {
-                    SubTask subTask = (SubTask) task;
-                    subTasks.put(task.getId(), subTask);
-                    if (!epics.isEmpty()) {
-                        epics.get(subTask.getEpicId()).addSubTask(subTask);
-                    }
-                }
+                case SUBTASK -> subTasks.put(task.getId(), (SubTask) task);
                 case EPIC -> epics.put(task.getId(), (Epic) task);
             }
         }

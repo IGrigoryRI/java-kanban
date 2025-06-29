@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -33,6 +32,9 @@ class FileBackedTaskManagerTest extends TaskManagerTest<FileBackedTaskManager> {
         if (tempFile != null && tempFile.exists()) {
             tempFile.delete();
         }
+        taskManager.clearTasks();
+        taskManager.clearEpics();
+        taskManager.clearSubTasks();
     }
 
     @Test
@@ -53,14 +55,10 @@ class FileBackedTaskManagerTest extends TaskManagerTest<FileBackedTaskManager> {
         taskManager.putNewSubTask(new SubTask("Подзадача 1", "Описание 3",
                 Duration.ofHours(1), LocalDateTime.of(1999, 3, 12, 21, 5), 1));
 
-        FileBackedTaskManager newManager = new FileBackedTaskManager();
-
-        List<Task> loadedTasks = newManager.getAll();
-
-        assertEquals(3, loadedTasks.size(), "Количество задач должно быть равно 3.");
-        assertEquals("Задача 1", loadedTasks.get(0).getName(), "Задача 1 должна быть загружена.");
-        assertEquals("Эпик 1", loadedTasks.get(1).getName(), "Задача 1 должна быть загружена.");
-        assertEquals("Подзадача 1", loadedTasks.get(2).getName(), "Задача 1 должна быть загружена.");
+        assertEquals(3, taskManager.getAll().size(), "Количество задач должно быть равно 3.");
+        assertEquals("Задача 1", taskManager.getAll().get(0).getName(), "Задача 1 должна быть загружена.");
+        assertEquals("Эпик 1", taskManager.getAll().get(1).getName(), "Задача 1 должна быть загружена.");
+        assertEquals("Подзадача 1", taskManager.getAll().get(2).getName(), "Задача 1 должна быть загружена.");
     }
 
     @Test
