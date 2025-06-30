@@ -107,45 +107,8 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         }
     }
 
-    private static String taskToString(Task task) throws ManagerSaveException {
-        switch (task.getType()) {
-            case TASK -> {
-                return String.format("%d,%s,%s,%s,%s,%s,%d",
-                        task.getId(),
-                        task.getType(),
-                        task.getName(),
-                        task.getStatus(),
-                        task.getDescription(),
-                        task.getStartTime(),
-                        task.getDuration().toMinutes());
-            }
-
-            case EPIC -> {
-                Epic epic = (Epic) task;
-
-                return String.format("%d,%s,%s,%s,%s",
-                        epic.getId(),
-                        epic.getType(),
-                        epic.getName(),
-                        epic.getStatus(),
-                        epic.getDescription());
-            }
-
-            case SUBTASK -> {
-                SubTask subTask = (SubTask) task;
-
-                return String.format("%d,%s,%s,%s,%s,%s,%s,%d",
-                        subTask.getId(),
-                        subTask.getType(),
-                        subTask.getName(),
-                        subTask.getStatus(),
-                        subTask.getDescription(),
-                        subTask.getStartTime(),
-                        subTask.getDuration().toMinutes(),
-                        subTask.getEpicId());
-            }
-            default -> throw new ManagerSaveException("Неизвестный тип задачи");
-        }
+    private static String taskToString(Task task) {
+        return task.taskToString();
     }
 
     private static Task taskFromString(String line) {

@@ -88,6 +88,16 @@ public class Task implements Comparable<Task> {
     public LocalDateTime getEndTime() {
         return startTime.plus(duration);
     }
+    public String taskToString() {
+        return String.format("%d,%s,%s,%s,%s,%s,%d",
+                this.getId(),
+                this.getType(),
+                this.getName(),
+                this.getStatus(),
+                this.getDescription(),
+                this.getStartTime(),
+                this.getDuration().toMinutes());
+    }
 
     public String toString() {
         return "TaskApp.Task{" +

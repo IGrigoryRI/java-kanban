@@ -24,6 +24,19 @@ public class SubTask extends Task {
     }
 
     @Override
+    public String taskToString() {
+        return String.format("%d,%s,%s,%s,%s,%s,%s,%d",
+                this.getId(),
+                this.getType(),
+                this.getName(),
+                this.getStatus(),
+                this.getDescription(),
+                this.getStartTime(),
+                this.getDuration().toMinutes(),
+                this.getEpicId());
+    }
+
+    @Override
     public String toString() {
         return "TaskApp.Subtask{" +
                 "name='" + name + '\'' +

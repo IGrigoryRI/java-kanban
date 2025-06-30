@@ -109,6 +109,16 @@ public class Epic extends Task {
         subTasks.remove(subTask);
     }
 
+    @Override
+    public String taskToString() {
+        return String.format("%d,%s,%s,%s,%s",
+                this.getId(),
+                this.getType(),
+                this.getName(),
+                this.getStatus(),
+                this.getDescription());
+    }
+
     public String toString() {
         return "TaskApp.Epic{" +
                 "name='" + name + '\'' +
