@@ -108,7 +108,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     }
 
     private static String taskToString(Task task) {
-        return task.taskToString();
+        return task.taskToStringForSave();
     }
 
     private static Task taskFromString(String line) {

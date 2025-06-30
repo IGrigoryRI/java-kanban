@@ -24,7 +24,7 @@ public class SubTask extends Task {
     }
 
     @Override
-    public String taskToString() {
+    public String taskToStringForSave() {
         return String.format("%d,%s,%s,%s,%s,%s,%s,%d",
                 this.getId(),
                 this.getType(),
