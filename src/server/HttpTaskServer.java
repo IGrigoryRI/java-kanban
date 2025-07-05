@@ -30,7 +30,7 @@ public class HttpTaskServer {
         server.stop(0);
     }
 
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) throws IOException {
         TaskManager taskManager = Managers.getDefault();
 
         HttpTaskServer server = new HttpTaskServer(taskManager);
