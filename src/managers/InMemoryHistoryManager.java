@@ -2,7 +2,7 @@ package managers;
 
 import java.util.*;
 
-import tasks.*;
+import tasks.Task;
 
 class InMemoryHistoryManager implements HistoryManager {
     private static class Node {
