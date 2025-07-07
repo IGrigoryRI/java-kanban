@@ -1,7 +1,11 @@
 package managers;
 
-import tasks.*;
+import tasks.Epic;
+import tasks.SubTask;
+import tasks.Task;
+
 import java.util.List;
+import java.util.TreeSet;
 
 public interface TaskManager {
     void putNewTask(Task newTask);
@@ -17,6 +21,10 @@ public interface TaskManager {
     List<Epic> getAllEpicsList();
 
     List<SubTask> getEpicAllSubTasks(int epicId);
+
+    TreeSet<Task> getPrioritizedTasks();
+
+    List<? extends Task> getHistory();
 
     Task getTask(int taskId);
 

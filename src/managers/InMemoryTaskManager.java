@@ -1,6 +1,8 @@
 package managers;
 
-import tasks.*;
+import tasks.Epic;
+import tasks.SubTask;
+import tasks.Task;
 
 import java.util.HashMap;
 import java.util.ArrayList;
@@ -71,7 +73,7 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public ArrayList<Epic> getAllEpicsList() {
+    public List<Epic> getAllEpicsList() {
         for (Epic epic: epics.values()) {
             historyManager.add(epic);
         }
@@ -85,6 +87,10 @@ public class InMemoryTaskManager implements TaskManager {
 
     public TreeSet<Task> getPrioritizedTasks() {
         return prioritizedTasks;
+    }
+
+    public List<? extends Task> getHistory() {
+        return historyManager.getHistory();
     }
 
     @Override
@@ -186,10 +192,6 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public void updateEpic(Epic epic) {
         epics.replace(epic.getId(), epic);
-    }
-
-    public List<? extends Task> getHistory() {
-        return historyManager.getHistory();
     }
 
     protected List<Task> getAll() {

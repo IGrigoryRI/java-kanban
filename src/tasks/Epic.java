@@ -10,14 +10,13 @@ import java.time.LocalDateTime;
 public class Epic extends Task {
 
     protected List<SubTask> subTasks = new ArrayList<>();
-    protected LocalDateTime endTime;
 
     public Epic(String name, String description) {
         super(name, description);
         this.taskType = TaskType.EPIC;
         this.startTime = getStartTime();
         this.duration = getDuration();
-        this.endTime = getEndTime();
+        this.endTime = getEpicEndTime();
     }
 
     @Override
@@ -65,8 +64,7 @@ public class Epic extends Task {
         return earliestStartTime;
     }
 
-    @Override
-    public LocalDateTime getEndTime() {
+    public LocalDateTime getEpicEndTime() {
         if (subTasks.isEmpty()) {
             return null;
         }
