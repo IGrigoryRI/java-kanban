@@ -9,6 +9,16 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/*
+ * Класс LocalDateTimeAdapter предоставляет адаптер для сериализации и десериализации объектов LocalDateTime.
+ * Используется для работы с JSON-данными через Gson.
+ *
+ * @param FORMATTER - форматтер для преобразования LocalDateTime в строку и обратно.
+ * @param writer - объект JsonWriter для записи данных.
+ * @param reader - объект JsonReader для чтения данных.
+ * @param localDateTime - объект LocalDateTime, который нужно сериализовать.
+ * @throws IOException - если возникает ошибка при записи данных.
+ */
 public class LocalDateTimeAdapter extends TypeAdapter<LocalDateTime> {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 

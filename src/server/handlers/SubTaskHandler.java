@@ -6,6 +6,7 @@ import com.google.gson.JsonParser;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import managers.TaskManager;
+import server.HttpMethod;
 import tasks.SubTask;
 
 import java.io.IOException;
@@ -13,6 +14,21 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/*
+ * Класс SubTaskHandler обрабатывает HTTP-запросы для управления подзадачами.
+ * Поддерживаемые эндпоинты:
+ * - GET /subtasks: Получение списка всех подзадач.
+ * - GET /subtasks/{id}: Получение подзадачи по ID.
+ * - POST /subtasks: Создание новой подзадачи.
+ * - POST /subtasks/{id}: Обновление существующей подзадачи.
+ * - DELETE /subtasks: Удаление всех подзадач.
+ * - DELETE /subtasks/{id}: Удаление подзадачи по ID.
+ *
+ * @param exchange - объект HttpExchange, содержащий информацию о запросе и ответе.
+ * @param path - массив строк, представляющий путь запроса.
+ * @param taskManager - менеджер задач, который будет использоваться для операций с эпиками.
+ * @throws IOException если возникает ошибка при отправке ответа.
+ */
 public class SubTaskHandler extends BaseHttpHandler implements HttpHandler {
     private final TaskManager taskManager;
 
@@ -23,10 +39,10 @@ public class SubTaskHandler extends BaseHttpHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         String[] path = exchange.getRequestURI().getPath().split("/");
-        String method = exchange.getRequestMethod();
+        HttpMethod method = HttpMethod.valueOf(exchange.getRequestMethod());
 
         switch (method) {
-            case "GET":
+            case GET:
                 try {
                     if (path.length == 2) {
                         List<SubTask> subTasks = taskManager.getAllSubTasksList();
@@ -53,7 +69,7 @@ public class SubTaskHandler extends BaseHttpHandler implements HttpHandler {
                 }
                 break;
 
-            case "POST":
+            case POST:
                 String body = new String(exchange.getRequestBody().readAllBytes());
                 JsonElement jsonElement = JsonParser.parseString(body);
                 JsonObject jsonSubTask = jsonElement.getAsJsonObject();
@@ -100,7 +116,7 @@ public class SubTaskHandler extends BaseHttpHandler implements HttpHandler {
                 }
                 break;
 
-            case "DELETE":
+            case DELETE:
                 if (path.length == 2) {
                     taskManager.clearSubTasks();
                     sendText(exchange, "Все подзадачи успешно удалены");

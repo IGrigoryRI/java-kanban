@@ -8,10 +8,26 @@ import com.sun.net.httpserver.HttpHandler;
 import managers.TaskManager;
 import tasks.Epic;
 import tasks.SubTask;
+import server.HttpMethod;
 
 import java.io.IOException;
 import java.util.List;
 
+/*
+ * Класс EpicHandler обрабатывает HTTP-запросы для управления эпиками.
+ * Поддерживаемые эндпоинты:
+ * - GET /epics: Получение списка всех эпиков.
+ * - GET /epics/{id}: Получение эпика по ID.
+ * - GET /epics/{id}/subtasks: Получение всех подзадач эпика.
+ * - POST /epics: Создание нового эпика.
+ * - DELETE /epics: Удаление всех эпиков.
+ * - DELETE /epics/{id}: Удаление эпика по ID.
+ *
+ * @param exchange - объект HttpExchange, содержащий информацию о запросе и ответе.
+ * @param path - массив строк, представляющий путь запроса.
+ * @param taskManager - менеджер задач, который будет использоваться для операций с эпиками.
+ * @throws IOException если возникает ошибка при отправке ответа.
+ */
 public class EpicHandler extends BaseHttpHandler implements HttpHandler {
     private final TaskManager taskManager;
 
@@ -22,10 +38,10 @@ public class EpicHandler extends BaseHttpHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         String[] path = exchange.getRequestURI().getPath().split("/");
-        String method = exchange.getRequestMethod();
+        HttpMethod method = HttpMethod.valueOf(exchange.getRequestMethod());
 
         switch (method) {
-            case "GET":
+            case GET:
                 try {
                     if (path.length == 2) {
                         List<Epic> epics = taskManager.getAllEpicsList();
@@ -70,7 +86,7 @@ public class EpicHandler extends BaseHttpHandler implements HttpHandler {
                 }
                 break;
 
-            case "POST":
+            case POST:
                 String body = new String(exchange.getRequestBody().readAllBytes());
                 JsonElement jsonElement = JsonParser.parseString(body);
                 JsonObject jsonEpic = jsonElement.getAsJsonObject();
@@ -96,7 +112,7 @@ public class EpicHandler extends BaseHttpHandler implements HttpHandler {
                 }
                 break;
 
-            case "DELETE":
+            case DELETE:
                 try {
                     if (path.length == 2) {
                         taskManager.clearEpics();

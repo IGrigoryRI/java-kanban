@@ -8,6 +8,21 @@ import server.handlers.*;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 
+/*
+ * Класс HttpTaskServer представляет HTTP-сервер для управления задачами.
+ * Сервер предоставляет API для работы с задачами, эпиками, подзадачами,
+ * историей просмотров и приоритизированным списком задач.
+ *
+ * Эндпоинты:
+ * - /tasks: Управление задачами.
+ * - /subtasks: Управление подзадачами.
+ * - /epics: Управление эпиками.
+ * - /history: Получение истории просмотров.
+ * - /prioritized: Получение приоритизированного списка задач.
+ *
+ * @param taskManager - менеджер задач, который используется для хранения и обработки данных.
+ * @throws IOException если возникает ошибка при создании сервера.
+ */
 public class HttpTaskServer {
     private static final int PORT = 8080;
     private final HttpServer server;
@@ -30,6 +45,9 @@ public class HttpTaskServer {
         server.stop(0);
     }
 
+/*
+ * Точка входа в программу.
+ */
     public static void main(String[] args) throws IOException {
         TaskManager taskManager = Managers.getDefault();
 

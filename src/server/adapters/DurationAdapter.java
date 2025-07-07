@@ -8,6 +8,15 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.time.Duration;
 
+/*
+ * Класс DurationAdapter предоставляет адаптер для сериализации и десериализации объектов Duration.
+ * Используется для работы с JSON-данными через Gson.
+ *
+ * @param writer - объект JsonWriter для записи данных.
+ * @param reader - объект JsonReader для чтения данных.
+ * @param value - объект Duration, который нужно сериализовать.
+ * @throws IOException если возникает ошибка при записи данных.
+ */
 public class DurationAdapter extends TypeAdapter<Duration> {
 
     @Override
